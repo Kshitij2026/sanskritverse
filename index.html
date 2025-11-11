@@ -509,9 +509,8 @@
             setSanskritText, 
             englishText, 
             isLoading, 
--            handleTranslate 
-+            handleTranslate,
-+            buttonRef
+            handleTranslate,
+            buttonRef
         }) => (
             <React.Fragment>
                 <div className="translator-container">
@@ -553,7 +552,7 @@
                         className="translate-button" 
                         onClick={handleTranslate}
                         disabled={isLoading || !sanskritText}
-+                        ref={buttonRef}
+                        ref={buttonRef}
                     >
                         {isLoading ? 'Translating...' : 'Translate'}
                     </button>
@@ -571,7 +570,7 @@
                     and diacritics of the original text, aiming to make ancient wisdom more accessible
                     to the modern world. Our platform is built with a clean, responsive, and interactive
                     design to provide a seamless and enjoyable experience.
-                </p>
+                </TEp>
             </section>
         );
 
@@ -594,8 +593,7 @@
             const [sanskritText, setSanskritText] = useState('');
             const [englishText, setEnglishText] = useState('');
             const [isLoading, setIsLoading] = useState(false);
--            const [showEasterEgg, setShowEasterEgg] = useState(false);
-+            const buttonRef = React.useRef(null); // Ref for the translate button
+            const buttonRef = React.useRef(null); // Ref for the translate button
 
             // Effect to apply theme to body
             useEffect(() => {
@@ -603,37 +601,34 @@
             }, [theme]);
 
             // Toggle theme
-            const toggleTheme = () => {
+            const toggleTheme = () = {
                 setTheme(theme === 'light' ? 'dark' : 'light');
             };
 
             // Mock Translation Function
-            const handleTranslate = () => {
+            const handleTranslate = () = {
                 if (!sanskritText.trim()) return;
 
                 setIsLoading(true);
                 setEnglishText(''); // Clear previous translation
 
                 // Mock API call
-                setTimeout(() => {
+                setTimeout(() = {
                     // Simulated response
                     const mockTranslation = `(Mock Translation) "May all beings be happy and prosperous."`;
                     
                     setEnglishText(mockTranslation);
                     setIsLoading(false);
 
--                    // Trigger Easter Egg
--                    setShowEasterEgg(true);
--                    setTimeout(() => setShowEasterEgg(false), 2000); // Hide after 2 seconds
-+                    // Trigger button success animation
-+                    if (buttonRef.current) {
-+                        buttonRef.current.classList.add('translation-success');
-+                        setTimeout(() => {
-+                            if (buttonRef.current) {
-+                                buttonRef.current.classList.remove('translation-success');
-+                            }
-+                        }, 1000); // Animation duration is 1s
-+                    }
+                    // Trigger button success animation
+                    if (buttonRef.current) {
+                        buttonRef.current.classList.add('translation-success');
+                        setTimeout(() = {
+                            if (buttonRef.current) {
+                                buttonRef.current.classList.remove('translation-success');
+                            }
+                        }, 1000); // Animation duration is 1s
+                    }
 
                 }, 1500); // Simulate 1.5 second delay
             };
@@ -649,12 +644,11 @@
                             englishText={englishText}
                             isLoading={isLoading}
                             handleTranslate={handleTranslate}
-+                            buttonRef={buttonRef}
+                            buttonRef={buttonRef}
                         />
                         <AboutSection />
                     </main>
                     <Footer />
--                    {showEasterEgg && <EasterEggAnimation />}
                 </React.Fragment>
             );
         };
